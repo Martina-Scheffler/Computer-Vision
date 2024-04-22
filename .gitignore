@@ -1,3 +1,5 @@
-checkerboards/*
+chessboard_videos/*
 videos/*
+distortions/*
+intrinsic_matrices/*
 *.png
