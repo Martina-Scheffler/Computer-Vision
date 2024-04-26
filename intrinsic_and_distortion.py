@@ -3,10 +3,11 @@
 import numpy as np
 import cv2
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+import sys
 
 def cut_video(camera):
     # skip 35s and use only 10s
-    ffmpeg_extract_subclip(f'./chessboard_videos/out{camera}F.mp4', 35, 45, 
+    ffmpeg_extract_subclip(f'./chessboard_videos/out{camera}F.mp4', 80, 90, 
                            targetname=f'./chessboard_videos/out{camera}F_cut.mp4')
     
 
@@ -20,7 +21,6 @@ def export_frames_from_video(camera):
     gray_frames = []
     
     for i in range(0, frame_count):
-        print(i)
         ret, frame = cap.read()
         
         if not ret:
@@ -48,8 +48,8 @@ def find_calibration_points(gray_frames):
     # termination criteria
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)  # todo: choose better params
 
-    chessboard_width = 5
-    chessboard_height = 7
+    chessboard_width = 6
+    chessboard_height = 9
 
     # prepare object points
     object_points = np.zeros((chessboard_width * chessboard_height, 3), np.float32)
@@ -99,17 +99,16 @@ def save_intrinsic_matrix_and_distortion(intrinsic_matrix, distortions, camera):
     np.save(f'distortions/{camera}', distortions)
 
  
-def calibrate_cameras(cameras):
-    for camera in cameras:
-        print(f'Calibrating camera #{camera}...')
-        # cut_video(camera)
-        _, gray_frames = export_frames_from_video(camera)
-        object_points, image_points = find_calibration_points(gray_frames)
-        intrinsic_matrix, distortions = calibrate(object_points, image_points, gray_frames[0].shape[::-1])
-        save_intrinsic_matrix_and_distortion(intrinsic_matrix, distortions, camera)
-        print(f'...Done.')
+def calibrate_cameras(camera):
+    print(f'Calibrating camera #{camera}...')
+    # cut_video(camera)
+    _, gray_frames = export_frames_from_video(camera)
+    object_points, image_points = find_calibration_points(gray_frames)
+    intrinsic_matrix, distortions = calibrate(object_points, image_points, gray_frames[0].shape[::-1])
+    save_intrinsic_matrix_and_distortion(intrinsic_matrix, distortions, camera)
+    print(f'...Done.')
 
 
 if __name__ == '__main__':
-    cameras = [1, 2, 3, 4, 5, 6, 7, 8, 12, 13]
-    calibrate_cameras(cameras)
+    camera = sys.argv[1]
+    calibrate_cameras(camera)
