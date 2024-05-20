@@ -1,6 +1,7 @@
 import numpy as np
 import cv2 
 import matplotlib.pyplot as plt
+import json
 
 
 class HomographyTool:
@@ -173,18 +174,12 @@ class HomographyTool:
         
     
     def import_homographies(self):
-        self.homographies = {
-            '1': np.load('homography_matrices/1.npy'),
-            '2': np.load('homography_matrices/2.npy'),
-            '3': np.load('homography_matrices/3.npy'),
-            '4': np.load('homography_matrices/4.npy'),
-            '5': np.load('homography_matrices/5.npy'),
-            '6': np.load('homography_matrices/6.npy'),
-            '7': np.load('homography_matrices/7.npy'),
-            '8': np.load('homography_matrices/8.npy'),
-            '12': np.load('homography_matrices/12.npy'),
-            '13': np.load('homography_matrices/13.npy')
-        }
+        with open('results/homography.json') as f:
+            self.homographies = json.load(f)
+        
+        # convert dictionary entries to numpy arrays
+        for k in self.homographies.keys():
+            self.homographies[k] = np.array(self.homographies[k])
         
         
     def calculate_image_positions(self):
