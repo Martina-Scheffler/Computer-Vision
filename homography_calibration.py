@@ -40,7 +40,6 @@ class HomographyCalibration:
             self.homographies[camera] = homography.tolist()
             
     
-    
     def save_matrices(self):
         with open('results/homography.json', 'w') as outfile: 
             json.dump(self.homographies, outfile)
