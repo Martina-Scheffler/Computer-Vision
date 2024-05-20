@@ -61,6 +61,10 @@ class PlotCameraPositions:
 
         # invert the y axis so origin is in top left corner
         plt.gca().invert_yaxis()
+        
+        # axis labels
+        plt.xlabel('x[m]')
+        plt.ylabel('y[m]', rotation=0)
 
         plt.axis('equal')
         
@@ -104,6 +108,11 @@ class PlotCameraPositions:
         # invert the y axis so origin is in top left corner
         plt.gca().invert_zaxis()
         plt.gca().invert_yaxis()
+        
+        # axis labels
+        ax.set_xlabel('x[m]')
+        ax.set_ylabel('y[m]')
+        ax.set_zlabel('z[m]')
 
         plt.show()
         
