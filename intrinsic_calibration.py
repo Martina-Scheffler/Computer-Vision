@@ -89,8 +89,6 @@ class IntrinsicCalibration:
                 i += 5
             else:
                 i += 5  # skip the next five frames
-            if len(corners_detected) >= 50:
-                break
 
         print(f'Number of frames where corners were detected: {len(corners_detected)}')   
         
