@@ -1,3 +1,3 @@
 input/chessboard_videos/*
 input/videos/*
-extrinsic_calibration_images/*
+images/extrinsic_calibration_images/*
