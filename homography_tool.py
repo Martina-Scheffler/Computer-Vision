@@ -20,16 +20,16 @@ class HomographyTool:
         
     
     def import_images(self):
-        self.img1 = cv2.imread(f'extrinsic_calibration_images/out1.png')
-        self.img2 = cv2.imread(f'extrinsic_calibration_images/out2.png')
-        self.img3 = cv2.imread(f'extrinsic_calibration_images/out3.png')
-        self.img4 = cv2.imread(f'extrinsic_calibration_images/out4.png')
-        self.img5 = cv2.imread(f'extrinsic_calibration_images/out5.png')
-        self.img6 = cv2.imread(f'extrinsic_calibration_images/out6.png')
-        self.img7 = cv2.imread(f'extrinsic_calibration_images/out7.png')
-        self.img8 = cv2.imread(f'extrinsic_calibration_images/out8.png')
-        self.img12 = cv2.imread(f'extrinsic_calibration_images/out12.png')
-        self.img13 = cv2.imread(f'extrinsic_calibration_images/out13.png')
+        self.img1 = cv2.imread(f'images/extrinsic_calibration_images/out1.png')
+        self.img2 = cv2.imread(f'images/extrinsic_calibration_images/out2.png')
+        self.img3 = cv2.imread(f'images/extrinsic_calibration_images/out3.png')
+        self.img4 = cv2.imread(f'images/extrinsic_calibration_images/out4.png')
+        self.img5 = cv2.imread(f'images/extrinsic_calibration_images/out5.png')
+        self.img6 = cv2.imread(f'images/extrinsic_calibration_images/out6.png')
+        self.img7 = cv2.imread(f'images/extrinsic_calibration_images/out7.png')
+        self.img8 = cv2.imread(f'images/extrinsic_calibration_images/out8.png')
+        self.img12 = cv2.imread(f'images/extrinsic_calibration_images/out12.png')
+        self.img13 = cv2.imread(f'images/extrinsic_calibration_images/out13.png')
         
         
     def build_grid(self, court):
@@ -116,38 +116,38 @@ class HomographyTool:
         if x < tile_width:
             # 1, 5, 7, 12 - first column
             if y < tile_height:
-                return 1
+                return '1'
             elif y < 2 * tile_height:
-                return 5
+                return '5'
             elif y < 3 * tile_height:
-                return 7
+                return '7'
             else:
-                return 12
+                return '12'
         elif x < 2 * tile_width:
             # 2, 6, 8, 13 - second column
             if y < tile_height:
-                return 2
+                return '2'
             elif y < 2 * tile_height:
-                return 6
+                return '6'
             elif y < 3 * tile_height:
-                return 8
+                return '8'
             else:
-                return 13
+                return '13'
         elif x < 3 * tile_width:
             # 3 - third column
             if y < tile_height:
-                return 3
+                return '3'
         else:
             # 4 - fourth column
             if y < tile_height:
-                return 4
+                return '4'
         
 
     def display_enlarged_image(self, camera):
         # display the image of the selected camera in fullscreen
         cv2.namedWindow('image', cv2.WINDOW_NORMAL)
         cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-        self.image = cv2.imread(f'extrinsic_calibration_images/out{camera}.png')
+        self.image = cv2.imread(f'images/extrinsic_calibration_images/out{camera}.png')
         image_rs = cv2.resize(self.image, self.display_scale) 
         cv2.imshow('image', image_rs)
         
@@ -169,9 +169,9 @@ class HomographyTool:
             
     def get_world_point(self, camera):
         # use homography matrix of selected point to transform from image to world coordinates
-        homography_matrix = np.load(f'homography_matrices/{camera}.npy')
+        homography_matrix = self.homographies[camera]
         world_point = np.dot(homography_matrix, self.clicked_point_in_image)
-        self.world_point = world_point / world_point[2]
+        self.world_point = world_point / world_point[2] / 1000
         print(f'World Point: {self.world_point}')
         
     
@@ -247,7 +247,7 @@ class HomographyTool:
         self.plot_court()
         
         # save
-        plt.savefig('images/marked_court.png', dpi=600)
+        plt.savefig('images/court.png', dpi=600)
         
      
     def plot_world_point_on_court(self):
@@ -291,6 +291,7 @@ class HomographyTool:
         
         # display grid and wait until a camera is picked
         self.import_images()
+        self.plot_unmarked_court()
         self.display_grid()
         cv2.setMouseCallback('cluster', self.click_grid) 
         cv2.waitKey(0)
