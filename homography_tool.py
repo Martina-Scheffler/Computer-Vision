@@ -162,6 +162,7 @@ class HomographyTool:
             # displaying the coordinates on the image window 
             font = cv2.FONT_HERSHEY_SIMPLEX 
             image_rs = cv2.resize(self.image, self.display_scale)
+            cv2.circle(image_rs, (x, y), 3, (255, 0, 0), 4)
             cv2.putText(image_rs, f'{self.clicked_point_in_image[0]}, {self.clicked_point_in_image[1]}', (x,y), 
                         font, 1, (255, 0, 0), 2)
             cv2.imshow('image', image_rs) 

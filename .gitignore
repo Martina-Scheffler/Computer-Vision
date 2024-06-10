@@ -1,3 +1,6 @@
 input/chessboard_videos/*
 input/videos/*
 images/extrinsic_calibration_images/*
+images/court.png
+images/marked_court.png
+*.mp4

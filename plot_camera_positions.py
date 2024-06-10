@@ -63,8 +63,8 @@ class PlotCameraPositions:
         plt.gca().invert_yaxis()
         
         # axis labels
-        plt.xlabel('x[m]')
-        plt.ylabel('y[m]', rotation=0)
+        plt.xlabel('x [m]')
+        plt.ylabel('y [m]', rotation=0)
 
         plt.axis('equal')
         
@@ -110,9 +110,9 @@ class PlotCameraPositions:
         plt.gca().invert_yaxis()
         
         # axis labels
-        ax.set_xlabel('x[m]')
-        ax.set_ylabel('y[m]')
-        ax.set_zlabel('z[m]')
+        ax.set_xlabel('x [m]')
+        ax.set_ylabel('y [m]')
+        ax.set_zlabel('z [m]')
 
         plt.show()
         
@@ -125,9 +125,9 @@ class PlotCameraPositions:
             errors.append(abs(self.ground_truth_cameras[camera] - self.extrinsic_matrices[camera][0:3, 3]))
     
         errors = np.array(errors)
-        print(f'Mean Error: {errors.mean(axis=0)}')
-        print(f'Median Error: {np.median(errors, axis=0)}')
-        print(f'Std. Deviation {np.std(errors, axis=0)}')
+        print(f'Mean Error [m]: {errors.mean(axis=0)}')
+        print(f'Median Error [m]: {np.median(errors, axis=0)}')
+        print(f'Std. Deviation [m]: {np.std(errors, axis=0)}')
         
         
 
