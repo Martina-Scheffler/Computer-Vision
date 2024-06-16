@@ -101,8 +101,10 @@ class ExtrinsicCalibration():
             
             
     def run(self):
+        print("Start extrinsic calibration...")
         self.calculate_extrinsic_matrices()
         self.save_matrices()
+        print("...Done.")
             
             
             

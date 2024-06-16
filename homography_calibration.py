@@ -48,8 +48,10 @@ class HomographyCalibration:
     
     
     def run(self):
+        print("Start homography calibration...")
         self.calculate_homography_matrices()
         self.save_matrices()
+        print("...Done.")
 
 
 
