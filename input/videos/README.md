@@ -1,0 +1,1 @@
+Place in here your videos for extrinsic calibration, with names like `out1.mp4`.

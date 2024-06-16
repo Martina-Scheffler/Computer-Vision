@@ -1,0 +1,1 @@
+Place in here your chessboard videos, with names like `out1F.mp4`.

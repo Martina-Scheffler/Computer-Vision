@@ -10,6 +10,7 @@
 
 ## Usage
 ### Intrinsic Calibration
+Note: For this, the videos mentioned above are necessary.
 1. In `intrinsic_calibration.py` change line 171 `cameras = ['1', '2']` to the cameras you want to calibrate
 2. Run the file 
 ```bash
@@ -57,6 +58,7 @@ This script reuses the files `results/extrinsic_image_points.json` and `results/
 ### Homography Tool
 This tool uses the homography matrices to visualize a clicked point in one camera's image in all other images and the real world.
 
+Note: do not worry if startup takes a while, it is loading multiple images.
 
 Run the file
 ```bash

@@ -1,5 +1,7 @@
 input/chessboard_videos/*
+!input/chessboard_videos/README.md
 input/videos/*
+!input/videos/README.md
 images/extrinsic_calibration_images/*
 images/court.png
 images/marked_court.png
