@@ -166,6 +166,7 @@ class IntrinsicCalibration:
             
 
 if __name__ == '__main__':
+    print("Please remember to place the videos in the input/ folders. Thank you!")
     cameras = ['1', '2']
     ic = IntrinsicCalibration(cameras=cameras)
     ic.extract_extrinsic_calibration_images()
